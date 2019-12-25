@@ -2,7 +2,7 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   dev: {
@@ -11,12 +11,9 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/tmall': {
-        target: 'http://127.0.0.1:8090',
+      '/tmall-service/': {
+        target: 'http://twisted-fate.chinasoft.com',
         changeOrigin: true,
-        pathRewrite: {
-          '^/tmall':'/tmall'
-        }
       }
     },
 

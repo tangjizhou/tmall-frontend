@@ -5,18 +5,16 @@ import App from './App'
 import router from './router'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
-import axios from 'axios'
+import axios from './framework/axios'
 import VueAxios from 'vue-axios'
-import ResponseStatus from "./components/common/ResponseStatus";
 
-Vue.config.productionTip = false
-Vue.use(ElementUI)
-Vue.use(VueAxios, axios)
-Vue.prototype.Status = ResponseStatus
+Vue.config.productionTip = false;
+Vue.use(ElementUI);
+Vue.use(VueAxios, axios);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: {App},
   template: '<App/>'
-})
+});

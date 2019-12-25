@@ -1,7 +1,0 @@
-const OK = 2000;
-const NOT_LOGIN = 4003;
-const BAD_REQUEST = 4000;
-const SERVER_INTERNAL_ERROR = 5000;
-export default {
-  OK, NOT_LOGIN, BAD_REQUEST, SERVER_INTERNAL_ERROR
-}
