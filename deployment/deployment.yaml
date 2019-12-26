@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tmall-frontend
+  namespace: twisted-fate
+  labels:
+    app: tmall-frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: tmall-frontend
+      labels:
+        app: tmall-frontend
+    spec:
+      containers:
+        - name: tmall-frontend
+          image: registry.cn-shanghai.aliyuncs.com/twisted-fate/tmall-frontend:1.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 200m
+            limits:
+              memory: 500Mi
+              cpu: 500m
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+      restartPolicy: Always
+      hostNetwork: false
+  selector:
+    matchLabels:
+      app: tmall-frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tmall-frontend
+  namespace: twisted-fate
+spec:
+  selector:
+    app: tmall-frontend
+  ports:
+    - port: 80
+      targetPort: 80
