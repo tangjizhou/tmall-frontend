@@ -9,9 +9,9 @@
           <el-input v-model="searchItem.realName" placeholder="姓名"/>
         </el-form-item>
         <el-form-item label="状态">
-          <el-select v-model="searchItem.userState" placeholder="请选择" value="请选择" clearable filterable
-                     @change="onUserStateChange">
-            <el-option v-for="item in userStates" :key="item.value" :label="item.description" :value="item.label">
+          <el-select v-model="searchItem.dataState" placeholder="请选择" value="请选择" clearable filterable
+                     @change="search">
+            <el-option v-for="item in dataState" :key="item.value" :label="item.cnName" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -26,7 +26,7 @@
       <el-table-column type="selection" width="55"/>
       <el-table-column prop="username" label="账号" width="160"/>
       <el-table-column prop="realName" label="真实姓名" width="160" show-overflow-tooltip/>
-      <el-table-column prop="state.description" label="状态" width="120" show-overflow-tooltip/>
+      <el-table-column prop="dataState.cnName" label="状态" width="120" show-overflow-tooltip/>
       <el-table-column prop="address" label="地址" show-overflow-tooltip/>
       <el-table-column prop="createTime" label="创建时间" width="180"/>
       <el-table-column prop="updateTime" label="更新时间" width="180"/>
@@ -35,6 +35,9 @@
 </template>
 
 <script>
+  import {userApi} from "./api";
+  import {enumApi} from "../commonApi";
+
   export default {
     name: "UserList",
     data() {
@@ -42,15 +45,15 @@
         searchItem: {
           username: '',
           realName: '',
-          userState: ''
+          dataState: ''
         },
-        userStates: [],
+        dataState: [],
         tableData: [],
         multipleSelection: []
       }
     },
     created() {
-      this.initUserStates();
+      this.listDataState();
       this.search();
     },
     methods: {
@@ -58,20 +61,17 @@
         this.multipleSelection = selectedRows;
       },
       search() {
-        $http.get("/user/listAll", {params: this.searchItem}).then((response) => {
+        userApi.listAll(this.searchItem).then((response) => {
           let data = response.data;
           this.tableData = data.result;
         });
       },
-      initUserStates() {
-        $http.get("/user/listUserSates").then((response) => {
+      listDataState() {
+        enumApi.dataState().then((response) => {
           let data = response.data;
-          this.userStates = data.result;
+          this.dataState = data.result;
         });
       },
-      onUserStateChange() {
-        this.search();
-      }
     }
   }
 </script>

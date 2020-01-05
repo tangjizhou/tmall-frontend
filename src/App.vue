@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <home-component/>
+    <menu-bar/>
   </div>
 </template>
 
 <script>
-    import HomeComponent from "./components/HomeComponent";
+  import MenuBar from "./components/MenuBar";
 
-    export default {
-        name: 'App',
-        components: {HomeComponent}
-    }
+  export default {
+    name: 'App',
+    components: {MenuBar}
+  }
 </script>
 
 <style>

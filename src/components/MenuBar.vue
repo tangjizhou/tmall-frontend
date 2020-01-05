@@ -4,7 +4,7 @@
       <el-menu :default-active="activeIndex2" mode="horizontal" @select="handleSelect"
                background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
         <el-menu-item index="1">
-          <router-link to="/hello">首页</router-link>
+          <router-link to="/login">首页</router-link>
         </el-menu-item>
         <el-submenu index="2">
           <template slot="title">
@@ -27,7 +27,6 @@
     </el-header>
 
     <el-container class="content-area">
-      <el-aside width="300px">Aside</el-aside>
       <el-main>
         <router-view/>
       </el-main>

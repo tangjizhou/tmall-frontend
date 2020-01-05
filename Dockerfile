@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx:1.16.0
-COPY --from=build-stage ./tmall-frontend/tmall /usr/share/nginx/html/tmall
+COPY --from=build-stage ./tmall-frontend/dist /usr/share/nginx/html/tmall
 EXPOSE 80
 RUN nginx
 CMD ["nginx", "-g", "daemon off;"]
