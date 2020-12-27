@@ -40,7 +40,6 @@ const router = new Router({
 });
 
 router.beforeEach((from, to, next) => {
-  console.log(from, to)
   init().then(token => {
     localStorage.setItem("token", token || '')
     return start()
@@ -50,7 +49,12 @@ router.beforeEach((from, to, next) => {
     return setToken(records)
   }).then(result => {
     console.log(result)
-  })
-  next()
+  }).then(() => next())
+  if (1 === 1) {
+    console.log("跳转到百度")
+    window.location.href = "https://wwww.baidu.com"
+  }
+  console.log("跳转到下一个路由")
+
 })
 export default router;
