@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Loading, Message, MessageBox} from "element-ui";
+import {Loading, Message} from "element-ui";
 import router from "../router";
 
 const OK = 2000;
@@ -48,14 +48,13 @@ $http.interceptors.response.use(response => {
       Message.error(message);
       return Promise.reject(message);
   }
-  return response;
 }, error => {
   destroyLoadingInstance(error.config);
   return Promise.reject(error);
 });
 
 function destroyLoadingInstance(config) {
-  if (config === null || config.loading === null) {
+  if (config === undefined || config === null || config.loading === null) {
     return;
   }
   config.loading.close();

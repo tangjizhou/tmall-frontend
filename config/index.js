@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/tmall-service/': {
-        target: 'http://twisted-fate.chinasoft.com:8090',
+        target: 'http://localhost:8090',
         changeOrigin: true,
       }
     },

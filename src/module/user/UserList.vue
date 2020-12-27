@@ -62,8 +62,7 @@
       },
       search() {
         userApi.listAll(this.searchItem).then((response) => {
-          let data = response.data;
-          this.tableData = data.result;
+          this.tableData = response.data.result.records;
         });
       },
       listDataState() {
